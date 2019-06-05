@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+
+app.use(express.json());
 const courses = [
   {id: 1, name: 'murder 101'},
   {id: 2, name: 'murder 201'},
@@ -31,6 +33,16 @@ app.get('/api/posts/:year/:month', (req, res) => {
 
 app.get('/api/posts', (req, res) => {
   res.send(req.query)
+})
+
+//just practice, no front end to actually send this post yet
+app.post('api/courses', (req, res) => {
+  const course = {
+    id: courses.length + 1,
+    name: req.body.name
+  };
+  courses.push(course);
+  res.send(course);
 })
 
 
